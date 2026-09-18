@@ -19,11 +19,11 @@ export interface ScoredResult {
   chakraScores: ChakraScore[];
 }
 
-function getChakraInterpretation(score: number): string {
-  if (score >= 23) return "Strong";
-  if (score >= 20) return "Balanced";
-  if (score >= 15) return "Developing";
-  if (score >= 10) return "Low";
+function getChakraInterpretation(percentage: number): string {
+  if (percentage >= 92) return "Strong";
+  if (percentage >= 80) return "Balanced";
+  if (percentage >= 60) return "Developing";
+  if (percentage >= 40) return "Low";
   return "Needs Attention";
 }
 
@@ -74,7 +74,7 @@ export function calculateScore(
       score: stats.score,
       maxScore: stats.maxScore,
       percentage: Math.round(percentage),
-      interpretation: getChakraInterpretation(stats.score)
+      interpretation: getChakraInterpretation(percentage)
     };
   });
 

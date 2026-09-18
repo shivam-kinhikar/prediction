@@ -3,6 +3,8 @@ import dbConnect from "@/lib/db";
 import { Assessment } from "@/models/Assessment";
 import { Question } from "@/models/Question";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
@@ -37,7 +39,11 @@ export async function GET(
     const sanitizedQuestions = questions.map(q => ({
       _id: q._id,
       questionText: q.questionText,
-      options: q.options.map(opt => ({ text: opt.text })) // omit weight!
+      questionTextMarathi: q.questionTextMarathi,
+      options: q.options.map(opt => ({ 
+        text: opt.text,
+        textMarathi: opt.textMarathi
+      })) // omit weight!
     }));
 
     // Return the combined data
